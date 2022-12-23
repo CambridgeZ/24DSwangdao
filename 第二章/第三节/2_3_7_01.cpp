@@ -23,6 +23,16 @@ void Remove(int x,node * head){
     /**
      * 删除其中所有值为x的节点
     */
+    LNode * p ;
+    if(head==NULL)
+        return ;
+    if(head->data==x){
+        p=L;
+        L=L->next ;
+        delete p;
+        remove(x,head);
+    }
+    else remove(x,head);
     
 }
 
