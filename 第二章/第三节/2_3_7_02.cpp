@@ -1,9 +1,7 @@
-//
-// Created by Mac on 2022/12/24.
-//
-/*
- * 删除链表中最小值的高效算法
- */
+/**
+ * 删除带头节点的链表中的所有值为x的节点
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -37,30 +35,30 @@ void PrintList(Node *head){
     cout<<endl;
 }
 
-void DeleteMinNode(Node *head){
-    int min = 0x7fffffff;
+void DeleteNode(Node *head,int x){
     Node *p= head;
     Node *r= head->next;
-    Node *minNode;
-    Node *preMinNode;
     while(r){
-        if(r->data<min){
-            preMinNode=p;
-            minNode=r;
-            min=r->data;
+        if(r->data==x){
+            p->next=r->next;
+            delete r;
+            r=p->next;
         }
-        r=r->next;
-        p=p->next;
+        else {
+            r=r->next;
+            p=p->next;
+        }
     }
-    preMinNode->next=minNode->next;
-    delete minNode;
 }
 
 int main(){
     Node head;
     CreateList(&head);
     PrintList(&head);
-    DeleteMinNode(&head);
+    int x;
+    cin>>x;
+    DeleteNode(&head,x);
     PrintList(&head);
+
     return 0;
 }
