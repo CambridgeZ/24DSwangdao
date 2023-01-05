@@ -1,8 +1,11 @@
 //
-// Created by Mac on 2022/12/28.
+// Created by Mac on 2023/1/5.
 //
-
+/*
+ * 实现二叉树自下而上，自右向左的层序遍历
+ */
 #include <iostream>
+#include <queue>
 #include <stack>
 
 using namespace std;
@@ -17,7 +20,7 @@ void CreateBiTree(BiTree &T){
      * 测试数据
      * 1:   1 2 -9999 -9999 3 -9999 -9999
      * 2:   1 2 3 -9999 -9999 4 -9999 -9999 5 -9999 -9999
-    */
+     */
     int data;
     cin>>data;
     if(data==-9999){
@@ -32,42 +35,30 @@ void CreateBiTree(BiTree &T){
     }
 }
 
-void PreOrder(BiTree T){
-    if(T==NULL){
-        return ;
-    }
-    else{
-        cout<<T->data<<" ";
-        PreOrder(T->lchild);
-        PreOrder(T->rchild);
-    }
-}
-
-void PreOrderByStack(BiTree T){
-    /*
-     * 不使用递归实现的先序号遍历
-     */
+void reverseLevelOrder(BiTree T){
+    queue<BiTree> Q;
     stack<BiTree> S;
-    BiTree p=T;
-    while(p||!S.empty()){
-        if(p){
-            cout<<p->data<<" ";
-            S.push(p);
-            p=p->lchild;
-        }
-        else{
-            p=S.top();
-            S.pop();
-            p=p->rchild;
-        }
+    Q.push(T);
+    while(!Q.empty()){
+        BiTree temp=Q.front();
+        S.push(temp);
+        Q.pop();
+        if(temp->lchild)
+            Q.push(temp->lchild);
+        if(temp->rchild)
+            Q.push(temp->rchild);
+    }
+
+    while(!S.empty()){
+        cout<<S.top()->data<<" ";
+        S.pop();
     }
 }
 
 int main(){
     BiTree T;
     CreateBiTree(T);
-    PreOrder(T);
-    cout<<endl;
-    PreOrderByStack(T);
+    reverseLevelOrder(T);
     return 0;
 }
+

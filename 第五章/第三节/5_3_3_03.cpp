@@ -1,6 +1,9 @@
 //
-// Created by Mac on 2022/12/28.
+// Created by Mac on 2023/1/5.
 //
+/*
+ * 编写二叉树的后序遍历的非递归算法
+ */
 
 #include <iostream>
 #include <stack>
@@ -13,11 +16,6 @@ typedef struct BiNode{
 }BiNode,*BiTree;
 
 void CreateBiTree(BiTree &T){
-    /*
-     * 测试数据
-     * 1:   1 2 -9999 -9999 3 -9999 -9999
-     * 2:   1 2 3 -9999 -9999 4 -9999 -9999 5 -9999 -9999
-    */
     int data;
     cin>>data;
     if(data==-9999){
@@ -32,18 +30,7 @@ void CreateBiTree(BiTree &T){
     }
 }
 
-void PreOrder(BiTree T){
-    if(T==NULL){
-        return ;
-    }
-    else{
-        cout<<T->data<<" ";
-        PreOrder(T->lchild);
-        PreOrder(T->rchild);
-    }
-}
-
-void PreOrderByStack(BiTree T){
+void PostOrderByStack(BiTree T){
     /*
      * 不使用递归实现的先序号遍历
      */
@@ -51,7 +38,6 @@ void PreOrderByStack(BiTree T){
     BiTree p=T;
     while(p||!S.empty()){
         if(p){
-            cout<<p->data<<" ";
             S.push(p);
             p=p->lchild;
         }
@@ -61,13 +47,4 @@ void PreOrderByStack(BiTree T){
             p=p->rchild;
         }
     }
-}
-
-int main(){
-    BiTree T;
-    CreateBiTree(T);
-    PreOrder(T);
-    cout<<endl;
-    PreOrderByStack(T);
-    return 0;
 }
