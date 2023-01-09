@@ -47,38 +47,28 @@ void CreateGraph(Graph& G){
     }
 };
 bool visited[MAXN+1];
-queue<int> Q;
 
-void BFS(Graph G,int i){
-    cout<<G.vex[i]<<" ";//访问当前的节点
-    visited[i]= true;
-    Q.push(i);//进入队列
-    while(!Q.empty()){
-        int j=Q.front();//类似于层序遍历
-        Q.pop();
-        for(int k=1;k<=G.vexNumber;k++){
-            if(G.arc[k][j]==1&&visited[k]== false){//如果两个节点之间存在边并且这个节点没有访问过就访问这个节点
-                //访问和当前节点相邻的节点，并且将这些节点入队列
-                cout<<G.vex[k]<<" ";
-                visited[k]= true;
-                Q.push(k);
-            }
+void DFS(Graph G,int i){
+    cout<<G.vex[i]<<" ";
+    visited[i]=true;
+    for(int k=1;k<=G.vexNumber;k++){
+        if(G.arc[k][i]==1&&visited[k]==false){
+            DFS(G,k);
         }
     }
-
 }
-
-void BFSTraverse(Graph G){
-    ::memset(visited,false, sizeof(visited));
-    for(int i=1;i<=G.vexNumber;i++){//对于其中没有被访问过的节点就从这个节点开始进行访问
-        if(!visited[i])
-            BFS(G,i);
+void DFSTravers(Graph G){
+    ::memset(visited,false,sizeof (visited));
+    for(int i=1;i<=G.vexNumber;i++){
+        if(visited[i]== false){
+            DFS(G,i);
+        }
     }
 }
 
 int main(){
     Graph G;
     CreateGraph(G);
-    BFSTraverse(G);
+    DFSTravers(G);
     return 0;
 }
