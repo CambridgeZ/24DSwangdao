@@ -10,11 +10,22 @@
 
 using namespace std;
 
-string getThePostAccordingToTheLast(string pre){
-    int n=pre.length();
+string getThePostAccordingToTheLast(string pre,int begin,int end){
+    string ans="";
+    if(begin==end){
+        ans+=pre[end];
+        return ans;
+    }
+    /*
+     * 分而治之的思想
+     */
+    ans=getThePostAccordingToTheLast(pre,begin+1,begin+(end-begin+1)/2)+ getThePostAccordingToTheLast(pre,begin+(end-begin+1)/2+1,end)+pre[begin];
+
+    return ans;
 
 }
 
 int main(){
-
+    cout<<getThePostAccordingToTheLast("1234567",0,6)<<endl;
+    return 0;
 }
