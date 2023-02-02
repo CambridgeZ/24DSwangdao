@@ -17,4 +17,7 @@
 
 欢迎star，对于代码中的问题也欢迎和我交流!
 
+本项目已经获得OSCS的收录，并得到了检测结果为安全的认证
+[![Security Status](https://www.murphysec.com/platform3/v3/badge/1619846332299128832.svg?t=1)](https://www.murphysec.com/accept?code=50f76010d961b15a4245677941bbbfa4&type=1&from=2&t=2)
+
 本代码遵循MIT开源协议.
